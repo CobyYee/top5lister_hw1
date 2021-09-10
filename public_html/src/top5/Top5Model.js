@@ -152,6 +152,7 @@ export default class Top5Model {
         this.saveLists();
     }
 
+    // Edits the name of a list
     changeListName(id, text) {
         this.top5Lists[this.getListIndex(id)].setName(text);
         this.sortLists();
@@ -159,10 +160,34 @@ export default class Top5Model {
         this.saveLists();
     }
 
+    // Removes a list
     removeList(id) {
         this.top5Lists.splice(this.getListIndex(id), 1);
+        this.clearStatus();
+        if(this.currentList === this.top5Lists[this.getListIndex(id)]) {
+            this.clearItems();
+        }
         this.sortLists();
         this.saveLists();
+    }
+
+    // Updates the status bar with the selected list
+    updateStatus(id) {
+        let currList = this.top5Lists[this.getListIndex(id)].getName();
+        document.getElementById("top5-statusbar").innerHTML = currList;
+    }
+
+    // Clears the status bar when the clear button is pressed
+    clearStatus() {
+        document.getElementById("top5-statusbar").innerHTML = "";
+    }
+
+    // Clears the items of the list from view
+    clearItems() {
+        for (let i = 0; i < 5; i++) {
+            let item = document.getElementById("item-" + (i+1));
+            item.innerHTML = "";
+        }
     }
 
     // SIMPLE UNDO/REDO FUNCTIONS

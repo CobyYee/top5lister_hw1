@@ -69,6 +69,7 @@ export default class Top5Controller {
 
             // GET THE SELECTED LIST
             this.model.loadList(id);
+            this.model.updateStatus(id);
         }
         // FOR DELETING THE LIST
         document.getElementById("delete-list-" + id).onmousedown = (event) => {
