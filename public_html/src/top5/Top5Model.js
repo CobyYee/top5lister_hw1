@@ -105,6 +105,8 @@ export default class Top5Model {
         }
         this.tps.clearAllTransactions();
         this.view.updateToolbarButtons(this);
+        // Change the status bar
+        document.getElementById("top5-statusbar").innerHTML = ("Top 5 " + this.top5Lists[this.getListIndex(id)].getName());
     }
 
     loadLists() {
@@ -156,7 +158,8 @@ export default class Top5Model {
     changeListName(id, text) {
         this.top5Lists[this.getListIndex(id)].setName(text);
         this.sortLists();
-        this.view.refreshLists(this.top5Lists);
+        this.updateStatus(id);
+        this.view.highlightList(id);
         this.saveLists();
     }
 
@@ -174,7 +177,7 @@ export default class Top5Model {
     // Updates the status bar with the selected list
     updateStatus(id) {
         let currList = this.top5Lists[this.getListIndex(id)].getName();
-        document.getElementById("top5-statusbar").innerHTML = currList;
+        document.getElementById("top5-statusbar").innerHTML = ("Top 5 " + currList);
     }
 
     // Clears the status bar when the clear button is pressed

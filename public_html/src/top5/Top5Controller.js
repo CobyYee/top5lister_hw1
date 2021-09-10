@@ -99,7 +99,6 @@ export default class Top5Controller {
                 if(event.key == 'Enter') {
                     let newValue = currentList.value;
                     this.model.changeListName(id, newValue);
-                    this.model.refreshList();
                 }
             }
         }
