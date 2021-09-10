@@ -207,7 +207,7 @@ input {
   color: white;
 }
 
-.list-card:hover button, .unselected-list-card:hover button {
+.list-card:hover .top5-button, .unselected-list-card:hover .top5-button {
   color: black;
 } 
 

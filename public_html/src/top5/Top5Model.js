@@ -162,11 +162,11 @@ export default class Top5Model {
 
     // Removes a list
     removeList(id) {
-        this.top5Lists.splice(this.getListIndex(id), 1);
         this.clearStatus();
-        if(this.currentList === this.top5Lists[this.getListIndex(id)]) {
+        if(this.currentList == this.top5Lists[this.getListIndex(id)]) {
             this.clearItems();
         }
+        this.top5Lists.splice(this.getListIndex(id), 1);
         this.sortLists();
         this.saveLists();
     }

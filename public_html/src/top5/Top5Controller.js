@@ -77,7 +77,7 @@ export default class Top5Controller {
             // VERIFY THAT THE USER REALLY WANTS TO DELETE THE LIST
             let modal = document.getElementById("delete-modal");
             this.listToDeleteIndex = id;
-            let listName = this.model.getList(id).getName();
+            let listName = this.model.getList(this.model.getListIndex(id)).getName();
             let deleteSpan = document.getElementById("delete-list-span");
             deleteSpan.innerHTML = "";
             deleteSpan.appendChild(document.createTextNode(listName));
