@@ -22,8 +22,13 @@ export default class Top5Controller {
             let newList = this.model.addNewList("Untitled", ["?","?","?","?","?"]);            
             this.model.loadList(newList.id);
             this.model.saveLists();
+            this.model.updateToolBar();
+            
+            document.getElementById("add-list-button").disabled = "true";
         }
         
+        this.model.updateToolBar();
+
         document.getElementById("undo-button").onmousedown = (event) => {
             this.model.undo();
         }
@@ -38,6 +43,9 @@ export default class Top5Controller {
             this.model.clearStatus();
             this.model.currentList = null;
             this.model.unselectAll();
+            this.model.updateToolBar();
+            
+            document.getElementById("add-list-button").disabled = false;
         }
 
         // SETUP THE ITEM HANDLERS
@@ -100,6 +108,9 @@ export default class Top5Controller {
             // GET THE SELECTED LIST
             this.model.loadList(id);
             this.model.updateStatus(id);
+            this.model.updateToolBar();
+            
+            document.getElementById("add-list-button").disabled = true;
         }
         // FOR DELETING THE LIST
         document.getElementById("delete-list-" + id).onmousedown = (event) => {
@@ -118,6 +129,14 @@ export default class Top5Controller {
             confirmButton.onmousedown = (event) => {
                 this.model.removeList(id);
                 modal.classList.remove("is-visible");
+                
+                if(this.model.hasCurrentList()) {
+                    document.getElementById("add-list-button").disabled = "true";
+                }
+                else {
+                    document.getElementById("add-list-button").disabled = false;
+                }
+                
             }
             cancelButton.onmousedown = (event) => {
                 modal.classList.remove("is-visible");
@@ -136,7 +155,7 @@ export default class Top5Controller {
                 let newValue = currentList.value;
                 this.model.changeListName(id, newValue);                
             }
-
+            this.model.updateToolBar();
         }
     }
 

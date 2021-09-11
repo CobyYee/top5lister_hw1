@@ -169,6 +169,7 @@ export default class Top5Model {
         this.clearStatus();
         if(this.currentList == this.top5Lists[this.getListIndex(id)]) {
             this.clearItems();
+            this.currentList = null;
         }
         this.top5Lists.splice(this.getListIndex(id), 1);
         this.sortLists();
@@ -204,28 +205,6 @@ export default class Top5Model {
     }
 
     moveItem(oldIndex, newIndex) {
-        /*
-        if(oldIndex < newIndex) {
-            let lowerIndex = oldIndex - 1;
-            let higherIndex = newIndex - 1;
-            let placeholder = this.currentList.getItemAt(lowerIndex);
-            for(let i = lowerIndex; i < higherIndex; i++) {
-                this.currentList.setItemAt(i, this.currentList.getItemAt(i+1));
-            }
-            this.currentList.setItemAt(higherIndex, placeholder);
-        }
-        else {
-            let lowerIndex = newIndex - 1;
-            let higherIndex = oldIndex - 1;
-            let placeholder = this.currentList.getItemAt(higherIndex);
-            for(let i = higherIndex; i > lowerIndex; i--) {
-                this.currentList.setItemAt(i, this.currentList.getItemAt(i-1));
-            }
-            this.currentList.setItemAt(lowerIndex, placeholder);
-        }
-        this.view.update(this.currentList);
-        this.saveLists();
-        */
        this.currentList.moveItem(oldIndex-1, newIndex-1);
        this.view.update(this.currentList);
        this.saveLists();
@@ -248,5 +227,15 @@ export default class Top5Model {
 
     updateToolBar() {
         this.view.updateToolbarButtons(this);
+        
+        if(this.currentList == null) {
+            this.view.disableButton("clear-button");
+            //this.view.enableButton("add-list-button");
+        }
+        else {
+            this.view.enableButton("clear-button");
+            //this.view.disableButton("add-list-button");
+        }
+        
     }
 }
