@@ -38,6 +38,7 @@ export default class Top5View {
         // MAKE THE TEXT SPAN
         let textSpan = document.createElement("input");
         textSpan.value = newList.getName();
+        textSpan.readOnly = true;
         textSpan.setAttribute("id", "list-card-text-" + newList.id);
         textSpan.setAttribute("class", "list-card-text");
         textSpan.appendChild(document.createTextNode(newList.name));

@@ -245,4 +245,8 @@ export default class Top5Model {
             this.view.updateToolbarButtons(this);
         }
     }
+
+    updateToolBar() {
+        this.view.updateToolbarButtons(this);
+    }
 }

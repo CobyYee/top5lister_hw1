@@ -83,6 +83,7 @@ export default class Top5Controller {
                 let moveFrom = event.dataTransfer.getData("text").substring(5);
                 let moveTo = event.target.id.substring(5);
                 this.model.moveItemTransaction(moveFrom, moveTo);
+                this.model.updateToolBar();
             }
 
             item.ondragover = (event) => {
@@ -124,12 +125,18 @@ export default class Top5Controller {
         }
         document.getElementById("list-card-text-" + id).ondblclick = (event) => {
             let currentList = document.getElementById("list-card-text-" + id);
+            currentList.readOnly = false;
             currentList.onkeydown = (event) => {
                 if(event.key == 'Enter') {
                     let newValue = currentList.value;
                     this.model.changeListName(id, newValue);
                 }
             }
+            currentList.onblur = (event) => {
+                let newValue = currentList.value;
+                this.model.changeListName(id, newValue);                
+            }
+
         }
     }
 
