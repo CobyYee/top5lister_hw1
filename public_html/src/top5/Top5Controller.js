@@ -23,8 +23,21 @@ export default class Top5Controller {
             this.model.loadList(newList.id);
             this.model.saveLists();
         }
+        
         document.getElementById("undo-button").onmousedown = (event) => {
             this.model.undo();
+        }
+        
+        document.getElementById("redo-button").onmousedown = (event) => {
+            this.model.redo();
+        }
+
+        // Clear button
+        document.getElementById("clear-button").onmousedown = (event) => {
+            this.model.clearItems();
+            this.model.clearStatus();
+            this.model.currentList = null;
+            this.model.unselectAll();
         }
 
         // SETUP THE ITEM HANDLERS
@@ -58,6 +71,22 @@ export default class Top5Controller {
                         this.model.restoreList();
                     }
                 }
+            }
+            item.setAttribute("draggable","true");
+
+            item.ondragstart = (event) => {
+                event.dataTransfer.setData("text", event.target.id);
+            }
+
+            item.ondrop = (event) => {
+                event.preventDefault();
+                let moveFrom = event.dataTransfer.getData("text").substring(5);
+                let moveTo = event.target.id.substring(5);
+                this.model.moveItemTransaction(moveFrom, moveTo);
+            }
+
+            item.ondragover = (event) => {
+                event.preventDefault();
             }
         }
     }

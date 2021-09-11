@@ -109,5 +109,11 @@ export default class Top5View {
         else {
             this.enableButton("undo-button");
         }   
+        if(!tps.hasTransactionToRedo()) {
+            this.disableButton("redo-button");
+        }
+        else {
+            this.enableButton("redo-button");
+        }
     }
 }

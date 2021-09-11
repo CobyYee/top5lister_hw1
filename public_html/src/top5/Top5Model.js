@@ -1,6 +1,7 @@
 import jsTPS from "../common/jsTPS.js"
 import Top5List from "./Top5List.js";
 import ChangeItem_Transaction from "./transactions/ChangeItem_Transaction.js"
+import MoveItem_Transaction from "./transactions/MoveItem_Transaction.js";
 
 /**
  * Top5Model.js
@@ -193,10 +194,54 @@ export default class Top5Model {
         }
     }
 
+    moveItemTransaction(oldIndex, newIndex) {
+        if(oldIndex != newIndex) {
+            //this.moveItem(oldIndex, newIndex);
+
+            let transaction = new MoveItem_Transaction(this, oldIndex, newIndex);
+            this.tps.addTransaction(transaction);
+        }
+    }
+
+    moveItem(oldIndex, newIndex) {
+        /*
+        if(oldIndex < newIndex) {
+            let lowerIndex = oldIndex - 1;
+            let higherIndex = newIndex - 1;
+            let placeholder = this.currentList.getItemAt(lowerIndex);
+            for(let i = lowerIndex; i < higherIndex; i++) {
+                this.currentList.setItemAt(i, this.currentList.getItemAt(i+1));
+            }
+            this.currentList.setItemAt(higherIndex, placeholder);
+        }
+        else {
+            let lowerIndex = newIndex - 1;
+            let higherIndex = oldIndex - 1;
+            let placeholder = this.currentList.getItemAt(higherIndex);
+            for(let i = higherIndex; i > lowerIndex; i--) {
+                this.currentList.setItemAt(i, this.currentList.getItemAt(i-1));
+            }
+            this.currentList.setItemAt(lowerIndex, placeholder);
+        }
+        this.view.update(this.currentList);
+        this.saveLists();
+        */
+       this.currentList.moveItem(oldIndex-1, newIndex-1);
+       this.view.update(this.currentList);
+       this.saveLists();
+    }
+
     // SIMPLE UNDO/REDO FUNCTIONS
     undo() {
         if (this.tps.hasTransactionToUndo()) {
             this.tps.undoTransaction();
+            this.view.updateToolbarButtons(this);
+        }
+    }
+
+    redo() {
+        if(this.tps.hasTransactionToRedo()) {
+            this.tps.doTransaction();
             this.view.updateToolbarButtons(this);
         }
     }
