@@ -199,15 +199,15 @@ input {
   color: var(--swatch-neutral);
 }
 
-.list-card:hover, .unselected-list-card:hover {
+.list-card:hover, .unselected-list-card:hover, .selected-list-card:hover {
   background-color: black;
 }
 
-.list-card:hover input, .unselected-list-card:hover input {
+.list-card:hover input, .unselected-list-card:hover input, .selected-list-card:hover input {
   color: white;
 }
 
-.list-card:hover [type=button], .unselected-list-card:hover [type=button] {
+.list-card:hover [type=button], .unselected-list-card:hover [type=button], .selected-list-card:hover [type=button] {
   color: black;
 } 
 
