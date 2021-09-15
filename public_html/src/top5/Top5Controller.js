@@ -144,6 +144,8 @@ export default class Top5Controller {
         }
         document.getElementById("list-card-text-" + id).ondblclick = (event) => {
             let currentList = document.getElementById("list-card-text-" + id);
+            currentList.style.backgroundColor = "white";
+            currentList.style.color = "black";
             currentList.readOnly = false;
             currentList.onkeydown = (event) => {
                 if(event.key == 'Enter') {
