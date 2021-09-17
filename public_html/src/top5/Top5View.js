@@ -104,13 +104,13 @@ export default class Top5View {
 
     updateToolbarButtons(model) {
         let tps = model.tps;
-        if (!tps.hasTransactionToUndo()) {
+        if (!tps.hasTransactionToUndo() || model.currentList == null) {
             this.disableButton("undo-button");
         }
         else {
             this.enableButton("undo-button");
         }   
-        if(!tps.hasTransactionToRedo()) {
+        if(!tps.hasTransactionToRedo() || model.currentList == null) {
             this.disableButton("redo-button");
         }
         else {

@@ -39,9 +39,9 @@ export default class Top5Controller {
 
         // Clear button
         document.getElementById("clear-button").onmousedown = (event) => {
+            this.model.currentList = null;
             this.model.clearItems();
             this.model.clearStatus();
-            this.model.currentList = null;
             this.model.unselectAll();
             this.model.updateToolBar();
             
@@ -73,10 +73,12 @@ export default class Top5Controller {
                     textInput.onkeydown = (event) => {
                         if (event.key === 'Enter') {
                             this.model.addChangeItemTransaction(i-1, event.target.value);
+                            this.model.updateToolBar();
                         }
                     }
                     textInput.onblur = (event) => {
                         this.model.addChangeItemTransaction(i-1, event.target.value);
+                        this.model.updateToolBar();
                     }
                 }
             }
