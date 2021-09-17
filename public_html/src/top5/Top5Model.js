@@ -173,7 +173,10 @@ export default class Top5Model {
         }
         this.top5Lists.splice(this.getListIndex(id), 1);
         this.sortLists();
-        this.view.highlightList(this.currentList.id);
+        if(this.currentList != null) {
+            this.view.highlightList(this.currentList.id);
+        }
+        this.updateToolBar();
         this.saveLists();
     }
 
