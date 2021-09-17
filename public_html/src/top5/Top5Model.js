@@ -175,6 +175,7 @@ export default class Top5Model {
         this.sortLists();
         if(this.currentList != null) {
             this.view.highlightList(this.currentList.id);
+            this.updateStatus(this.currentList.id);
         }
         this.updateToolBar();
         this.saveLists();
